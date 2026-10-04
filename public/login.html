@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>kx panel</title>
+<link rel="stylesheet" href="/style.css">
+</head><body>
+<form class="card" id="f">
+  <h1>kx panel</h1>
+  <input id="u" placeholder="user" autocomplete="username">
+  <input id="p" type="password" placeholder="password" autocomplete="current-password">
+  <button>Login</button>
+  <div class="status" id="s"></div>
+</form>
+<script>
+const f = document.getElementById('f');
+f.onsubmit = async (e) => {
+  e.preventDefault();
+  const r = await fetch('/api/login', {
+    method: 'POST',
+    headers: {'content-type':'application/json'},
+    body: JSON.stringify({user: u.value, pass: p.value}),
+  });
+  const j = await r.json();
+  if (j.ok) { localStorage.setItem('kx_token', j.token); location.href = '/index.html'; }
+  else { document.getElementById('s').textContent = 'invalid'; }
+};
+</script>
+</body></html>

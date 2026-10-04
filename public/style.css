@@ -1,0 +1,18 @@
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui;background:#0b0b0d;color:#eee;padding:20px}
+header{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+h1{font-size:20px;margin:0;flex:1}
+button,.btn{background:#2b8cff;color:#fff;border:0;padding:10px 16px;border-radius:10px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;font-size:14px}
+button:active,.btn:active{opacity:.7}
+.card{background:#161619;border:1px solid #232327;border-radius:14px;padding:16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.host-top{display:flex;justify-content:space-between;margin-bottom:8px}
+.host-name{font-weight:600}
+.host-ip{font-family:monospace;color:#2b8cff}
+.meta{font-size:13px;opacity:.65;margin-top:4px}
+.drop-label{font-weight:600;margin-bottom:6px;word-break:break-all}
+form.card{max-width:360px;margin:80px auto;display:flex;flex-direction:column;gap:10px}
+input{background:#0f0f12;border:1px solid #232327;color:#eee;padding:12px;border-radius:10px;outline:none;font-size:15px}
+input:focus{border-color:#2b8cff}
+.status{font-size:13px;opacity:.7;text-align:center}

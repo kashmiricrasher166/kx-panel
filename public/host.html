@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>kx — host</title>
+<link rel="stylesheet" href="/style.css">
+</head><body>
+<header>
+  <h1 id="title">host</h1>
+  <a href="/index.html" class="btn">back</a>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+const token = localStorage.getItem('kx_token');
+if (!token) location.href = '/login.html';
+const id = new URLSearchParams(location.search).get('id');
+
+async function load() {
+  const r = await fetch('/api/hosts/' + id, {headers: {'x-session': token}});
+  if (r.status === 401) return location.href = '/login.html';
+  const j = await r.json();
+  document.getElementById('title').textContent = j.host.host + ' — ' + j.host.ip;
+  const g = document.getElementById('grid');
+  g.innerHTML = '';
+  for (const d of j.drops) {
+    const el = document.createElement('div');
+    el.className = 'card drop';
+    el.innerHTML = `
+      <div class="drop-label">${d.label}</div>
+      <div class="meta">kind: ${d.kind} — size: ${(d.size/1024).toFixed(1)} KB</div>
+      <div class="meta">${new Date(d.ts).toLocaleString()}</div>
+      <a class="btn" href="/api/download?folder=${encodeURIComponent(d.folder)}&file=${encodeURIComponent(d.file)}&s=${token}">download</a>
+    `;
+    g.appendChild(el);
+  }
+}
+load();
+</script>
+</body></html>
